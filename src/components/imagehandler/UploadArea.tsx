@@ -21,8 +21,8 @@ const UploadArea = ({ files, setFiles }: Props) => {
         <div className="flex flex-col gap-4 mt-8">
        {files.length === 0 &&  <FontAwesomeIcon icon={faImage} className="h-24 text-gray-600" /> }
         <div className="grid grid-cols-3 gap-4">
-          {files.map((file) => (
-            <UploadThumbnail file={file} />
+          {files.map((file,idx) => (
+            <UploadThumbnail key={idx} file={file} />
           ))}
           </div>
         
