@@ -4,6 +4,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Header from "@/components/navbar/Header";
+import { Toaster } from "sonner";
 
 const inter = Nunito_Sans({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default async function  RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster richColors position="top-center" />
         <Header session={session} />
         {children}
         </body>

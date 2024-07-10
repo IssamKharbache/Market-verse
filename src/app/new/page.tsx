@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
 import { useState } from "react";
 import { createAd } from "../actions/listingActions";
+import LoadingSpinner from "@/components/spinner/LoadingSpinner";
+import SubmitButton from "@/components/forms/SubmitButton";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 const newListPage = () => {
 
@@ -21,6 +25,9 @@ const newListPage = () => {
   const [location, setLocation] = useState<Location>(defaultLocation);
   const [geoLocation, setGeoLocation] = useState<Location | null>(null);
 
+  //states to handle submit
+  const [isImageUploading,setIsImageUploading] = useState<boolean>(false);
+
   //get current location function
   const handleLocateMyPosition = () => {
     navigator.geolocation.getCurrentPosition((ev) => {
@@ -32,23 +39,26 @@ const newListPage = () => {
   //handle submit function
 
   const handleSubmit = async (formData: FormData) => {
-
     formData.set("location", JSON.stringify(location));
     formData.set("files", JSON.stringify(files));
-
-    await createAd(formData);
-
+    const res = await createAd(formData);
+    toast.success("Listing created successfully");
+    redirect("/listing/"+res._id)
+    
   }
 
   return (
     <form action={handleSubmit} className="max-w-[1000px] mx-auto flex gap-8 mt-8">
       {/* input fiels */}
-      <div className="flex flex-col">
+      <div className="grow">
         <AddListingForm />
+         <SubmitButton isImageUploading={isImageUploading}>
+          Publish listing
+         </SubmitButton>
       </div>
       {/* image uploader and location */}
       <div className="flex flex-col">
-        <UploadArea files={files} setFiles={setFiles} />
+        <UploadArea setIsImageUploading={setIsImageUploading} files={files} setFiles={setFiles} />
         <div className="mt-6">
           <div className="flex items-center justify-between gap-6 mb-4">
             <label className="mb-2" htmlFor="where">Where is your listing located</label>

@@ -9,8 +9,9 @@ import UploadThumbnail from "./UploadThumbnail";
 type Props = {
   files: UploadResponse[];
   setFiles: Dispatch<SetStateAction<UploadResponse[]>>;
+  setIsImageUploading:Dispatch<SetStateAction<boolean>>;
 };
-const UploadArea = ({ files, setFiles }: Props) => {
+const UploadArea = ({ files, setFiles ,setIsImageUploading }: Props) => {
     const [isUploading,setIsUploading] = useState(false);
   return (
     <div className="grow pt-8 ">
@@ -32,10 +33,14 @@ const UploadArea = ({ files, setFiles }: Props) => {
           >
            
             <Uploader
-            onUploadStart={()=>setIsUploading(true)}
+            onUploadStart={()=>{
+              setIsUploading(true);
+              setIsImageUploading(true);
+            }}
               onSuccess={(file) => {
                 setFiles((prev) => [...prev, file]);
                 setIsUploading(false);
+                setIsImageUploading(false);
 
             }}
             />

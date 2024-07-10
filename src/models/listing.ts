@@ -1,7 +1,7 @@
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
 import { Model, model, models, Schema } from "mongoose";
 
-export type listing = {
+export type listings = {
     title:string;
     price:number;
     description:string;
@@ -15,7 +15,7 @@ export type listing = {
     userEmail:string;
 }
 
-const listingSchema = new Schema<listing>({
+const listingSchema = new Schema<listings>({
 title:String,
 price:Number,
 category:String,
@@ -28,4 +28,4 @@ userEmail:{type:String,required:true}
 },{timestamps:true});
 
 
-export const listingModel = (models?.listingSchema as Model<listing>) || model<listing>("listing",listingSchema);
+export const listingModel = (models?.listings as Model<listings>) || model<listings>("listings",listingSchema);
