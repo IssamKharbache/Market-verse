@@ -2,6 +2,7 @@ import { UploadResponse } from "imagekit/dist/libs/interfaces";
 import { Model, model, models, Schema } from "mongoose";
 
 export type listings = {
+    _id: string;
     title:string;
     price:number;
     description:string;

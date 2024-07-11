@@ -9,7 +9,7 @@ import React from 'react'
 
 const Header = ({session}:{session:Session | null}) => {
   return (
-    <header className='flex justify-between items-center p-4 border-b'>
+    <header className='flex justify-between h-24 items-center px-8 border-b'>
         <Link  href="/" className='text-3xl font-bold text-primary'>Market verse</Link>
         <div className="flex gap-8  *:rounded-md *:px-4 *:py-1 *:font-semibold *:duration-300">
          <Link href="/new" className='bg-primary hover:bg-primary-hover text-white inline-flex items-center gap-2'>

@@ -1,11 +1,26 @@
 import { UploadResponse } from 'imagekit/dist/libs/interfaces'
-import React from 'react'
+import { MouseEvent, MouseEventHandler } from 'react';
+import MyImage from './MyImage';
 
-const UploadThumbnail = ({file}:{file:UploadResponse}) => {
+
+type Props = {
+file:UploadResponse;
+onClick?: ()=>void;
+}
+
+const UploadThumbnail = ({file,onClick}:Props) => {
+
+  function handleClick(ev:React.MouseEvent){
+    if(onClick){
+      ev.preventDefault();
+      return onClick();
+    }
+    location.href = file.url;
+  }
     if(file.fileType === "image"){
         return(
-           <a href={file.url} target='_blank'>
-             <img src={file.url+"?tr=w-100,h-100,fo-auto"} style={{height:"100px"}} alt="thumbnail" />
+           <a onClick={handleClick} target='_blank'>
+             <MyImage src={file.filePath} aiCrop={true} width={300} height={300}  alt="Listing thumbnail"  />
            </a>
         )
     }
