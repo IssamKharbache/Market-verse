@@ -16,3 +16,15 @@ label.upload-btn input[type="file"] {
    @apply hidden ;
 }
 
+
+label.radio-btn{
+    @apply flex items-center py-1   gap-4 bg-slate-200/60 hover:bg-slate-300/50 has-[:checked]:bg-slate-300/90 p-4 rounded capitalize my-3 cursor-pointer
+}
+
+label.radio-btn span.icon{
+    @apply size-14  duration-300  bg-gray-300/60 rounded-full flex items-center justify-center
+}
+
+label.radio-btn svg {
+    @apply h-4 
+}

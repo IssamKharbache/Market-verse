@@ -7,7 +7,7 @@ const SubmitButton = ({
   isImageUploading,
 }: {
   children: ReactNode;
-  isImageUploading: boolean;
+  isImageUploading?: boolean;
 }) => {
   const { pending } = useFormStatus();
  

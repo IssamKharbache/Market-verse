@@ -33,16 +33,18 @@ type MyImageProps = ImageProps & {
   width:number;
 }
 
-const MyImage =  (props:MyImageProps) => {
+const MyImage =  ({width,height,aiCrop,...props}:MyImageProps) => {
   
   return (
     <Image
     className="rounded"
       loader={args => imageKitLoader({
         ...args,
-        height:props.height,
-        width:props.width
-        ,aiCrop:props.aiCrop})}
+        height,
+        width
+        ,aiCrop})}
+        width={width}
+        height={height}
       {...props}
     />
   );
