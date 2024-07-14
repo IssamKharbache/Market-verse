@@ -6,7 +6,7 @@ import { listings } from "@/models/listing";
 const Listing = ({listing}:{listing:listings}) => {
  
   return (
-    <div  className="min-h-24 flex  flex-col gap-2 justify-start">
+    <div  className="min-h-24 flex  flex-col gap-2  md:items-start md:justify-start">
     {listing.files?.length > 0 && (
       <div className="rounded-md relative">
         <UploadThumbnail onClick={()=>{}} file={listing.files[0]} />

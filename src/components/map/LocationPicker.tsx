@@ -19,7 +19,7 @@ const LocationPicker = ({defaultLocation, onChange,geoCords}:{defaultLocation:Lo
         const map = new Map(mapRef.current as HTMLDivElement,{
             mapId:"map",
             center:defaultLocation,
-            zoom:8,
+            zoom:6,
             mapTypeControl:false,
             streetViewControl:false 
         });

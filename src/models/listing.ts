@@ -28,5 +28,7 @@ userEmail:{type:String,required:true}
 
 },{timestamps:true});
 
+listingSchema.index({location:"2dsphere"});
+
 
 export const listingModel = (models?.listings as Model<listings>) || model<listings>("listings",listingSchema);

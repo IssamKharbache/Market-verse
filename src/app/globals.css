@@ -22,7 +22,7 @@ label.radio-btn{
 }
 
 label.radio-btn span.icon{
-    @apply size-14  duration-300  bg-gray-300/60 rounded-full flex items-center justify-center
+    @apply size-8 md:size-12  duration-300  bg-gray-300/60 rounded-full flex items-center justify-center
 }
 
 label.radio-btn svg {

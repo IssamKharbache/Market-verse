@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
 import { useState } from "react";
 import { createAd } from "../actions/listingActions";
-import LoadingSpinner from "@/components/spinner/LoadingSpinner";
 import SubmitButton from "@/components/forms/SubmitButton";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
