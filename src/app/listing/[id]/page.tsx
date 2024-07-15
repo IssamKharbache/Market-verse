@@ -3,6 +3,7 @@
 import Gallery from "@/components/imagehandler/Gallery";
 import UploadThumbnail from "@/components/imagehandler/UploadThumbnail";
 import UploadView from "@/components/imagehandler/UploadView";
+import LocationMap from "@/components/map/LocationMap";
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -43,6 +44,10 @@ const page =  async (args:Props) => {
       <FontAwesomeIcon icon={faLocationDot} />
      <p className='font-bold'>{country}</p>
      </div>
+     <div className="flex flex-col">
+    <label htmlFor="">Location</label>
+    <LocationMap location={listings.location} className="w-full h-72" />
+    </div>
     </div>
   </div>
   )
