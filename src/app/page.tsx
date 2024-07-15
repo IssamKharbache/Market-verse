@@ -3,12 +3,10 @@ import FilterForm from "@/components/forms/FilterForm";
 import Listing from "@/components/home/Listing";
 import LoadingSpinner from "@/components/spinner/LoadingSpinner";
 import { listings } from "@/models/listing";
-import { defaultRadius } from "@/utils/db";
 import { useEffect,useState } from "react";
 
 export default function Home() {
-  const [listingData, setListingData] = useState<listings[]>(null);
- 
+  const [listingData, setListingData] = useState<listings[]>();
   //use effect to fetch the data
   useEffect(() => {
     fetchData();
@@ -19,17 +17,11 @@ export default function Home() {
     if(!params){
       params = new URLSearchParams();
     }
-    if(!params.get("center")){
-      return;
-    }
-    if(!params.has("radius")){
-      params.set("radius",defaultRadius.toString());
-    }
     const url = `/api/listings?${params?.toString() || ""}`;
 
     await fetch(url).then((res) => {
       res.json().then((listings) => {
-        setListingData(listings.data);
+        setListingData(listings);
       });
     });
   };

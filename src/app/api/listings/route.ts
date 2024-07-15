@@ -12,10 +12,9 @@ export const GET = async (req: Request, res: Response) => {
     const queryCat = searchParams.get("category");
     const min = searchParams.get("min");
     const max = searchParams.get("max");
-    const radius = searchParams.get("radius");
-    const center = searchParams.get("center");
+
+    
     const filter: FilterQuery<listings> = {};
-    const aggregationSteps: PipelineStage[] = [];
 
     //filtering with title
     if (query) {
@@ -23,7 +22,7 @@ export const GET = async (req: Request, res: Response) => {
     }
     if (queryCat) {
       if (queryCat !== "all") {
-        filter.category = { $regex: ".*" + queryCat + ".*", $options: "i" };
+        filter.category = queryCat;
       } else if (queryCat === "all") {
         filter.category = { $regex: ".*" + ".*", $options: "i" };
       }
@@ -32,45 +31,11 @@ export const GET = async (req: Request, res: Response) => {
     if (min && !max) filter.price = { $gte: min };
     if (max && !min) filter.price = { $lte: max };
     if (min && max) filter.price = { $gte: min, $lte: max };
-    if (radius && center) {
-      const coords = center.split("-");
-      aggregationSteps.push({
-        $geoNear: {
-          near: {
-            type: "Point",
-            coordinates: [parseFloat(coords[0]),parseFloat(coords[1])],
-          },
-          query: filter,
-          includeLocs: "location",
-          distanceField: "distance",
-          maxDistance: parseInt(radius),
-          spherical: true,
-        },
-      });
-    }
-    aggregationSteps.push({
-      $sort: { createdAt: -1 },
-    });
+ 
 
-    aggregationSteps.push({
-      $match: filter,
-    });
-
-    aggregationSteps.push({
-      $sort: {
-        createdAt: -1,
-      },
-    });
-    //
-    const listings = await listingModel.aggregate(aggregationSteps);
-    return NextResponse.json({
-      success: true,
-      data: listings,
-    });
+    const listings = await listingModel.find(filter ,null,{sort:{ createdAt: -1 }});
+    return Response.json(listings);
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      message: "Internal error occurred",
-    });
+    return Response.json("Error 505 while getting listing");
   }
 };
