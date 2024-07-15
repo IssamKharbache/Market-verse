@@ -25,12 +25,12 @@ const page =  async (args:Props) => {
     return "Not found !"
   }
   return(
-    <div className="flex  absolute inset-0 top-24 " >
-    <div className="w-3/5 grow bg-black text-white flex flex-col relative">
+    <div className="flex flex-col md:flex-row  absolute inset-0 top-24 " >
+    <div className="w-full md:w-3/5  grow bg-black text-white flex flex-col relative">
       {/* left */}
       <Gallery files={listings.files} />
     </div>
-    <div className="w-2/5 p-8 grow shrink-0">
+    <div className="md:w-2/5 w-full p-8 grow shrink-0">
       <h1 className="text-2xl font-bold">{listings.title}</h1>
       <div className="flex items-center gap-4 mt-4">
         <p className="text-lg font-semibold">Category</p>

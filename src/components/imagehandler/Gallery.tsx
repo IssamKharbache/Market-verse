@@ -30,7 +30,7 @@ const Gallery = ({files}:{files:UploadResponse[]}) => {
       <MyImage src={activeFile.filePath} alt='bg' width={2048} height={2048} className="object-cover opacity-30 blur h-full w-full " />
       </div>
     }
-      <div className="grow flex items-center justify-center p-4 relative">
+      <div className="grow flex items-center justify-center h-80 md:h-auto p-4 relative">
         {activeFile && (
         <>
        
