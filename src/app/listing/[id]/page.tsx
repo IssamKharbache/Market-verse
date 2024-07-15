@@ -5,16 +5,20 @@ import UploadThumbnail from "@/components/imagehandler/UploadThumbnail";
 import UploadView from "@/components/imagehandler/UploadView";
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Props = {
   params:{
     id:string
+
   };
   searchParams:{[key:string]:string};
 }
 const page =  async (args:Props) => {
   await connectDb();
   const id =  args.params.id
+  const country = args.searchParams.location ;
   const listings = await listingModel.findById(id);
   if(!listings){
     return "Not found !"
@@ -35,6 +39,10 @@ const page =  async (args:Props) => {
       <p className="text-sm font-semibold">{listings.description}</p>
       <label>Contact information</label>
       <p className="font-semibold">{listings.contact}</p>
+      <div className="flex gap-2 items-center mb-4 mt-6">
+      <FontAwesomeIcon icon={faLocationDot} />
+     <p className='font-bold'>{country}</p>
+     </div>
     </div>
   </div>
   )

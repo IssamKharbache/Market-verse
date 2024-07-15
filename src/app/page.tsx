@@ -1,12 +1,15 @@
 "use client";
 import FilterForm from "@/components/forms/FilterForm";
 import Listing from "@/components/home/Listing";
+import Skeleton from "@/components/home/Skeleton";
 import LoadingSpinner from "@/components/spinner/LoadingSpinner";
 import { listings } from "@/models/listing";
 import { useEffect,useState } from "react";
+import Loading from "./loading";
 
 export default function Home() {
   const [listingData, setListingData] = useState<listings[]>();
+  const [loading,setLoading] = useState<boolean>(false);
   //use effect to fetch the data
   useEffect(() => {
     fetchData();
@@ -14,6 +17,7 @@ export default function Home() {
   //
 
   const fetchData = async (params?: URLSearchParams) => {
+    setLoading(true)
     if(!params){
       params = new URLSearchParams();
     }
@@ -21,6 +25,7 @@ export default function Home() {
 
     await fetch(url).then((res) => {
       res.json().then((listings) => {
+        setLoading(false);
         setListingData(listings);
       });
     });
@@ -62,12 +67,19 @@ export default function Home() {
             )
           }
           {
-            listingData  === null && (
-              <LoadingSpinner />
-            )
+            loading && <>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            </>
           }
         </div>
       </div>
+      
     </div>
   );
 }

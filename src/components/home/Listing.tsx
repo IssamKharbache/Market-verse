@@ -8,7 +8,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 const Listing = ({listing}:{listing:listings}) => {
 
-  const [city,setCity] = useState<string>("");
+  const [country,setCountry] = useState<string>("");
  
    useEffect(()=>{
     const getGeoCoding = (latitude:number,longitude:number) => {
@@ -19,7 +19,7 @@ const Listing = ({listing}:{listing:listings}) => {
         const adress =  data.results[0].formatted_address.split(",")
         const country = adress[1];
         const countryWithoutNumbers = country?.replace(/\d+/g, '');
-        setCity(countryWithoutNumbers ? countryWithoutNumbers : "Unknown");
+        setCountry(countryWithoutNumbers ? countryWithoutNumbers : "Unknown");
         
       }).catch((error)=>{
         console.log(error);
@@ -32,7 +32,7 @@ const Listing = ({listing}:{listing:listings}) => {
     {listing.files?.length > 0 && (
       <div className="rounded-md relative">
         <UploadThumbnail onClick={()=>{}} file={listing.files[0]} />
-          <Link href={`/listing/${listing._id}`} className="absolute inset-0 "></Link>
+          <Link href={`/listing/${listing._id}?location=${country}`} className="absolute inset-0 "></Link>
       </div>
     )}
     <div className="flex flex-col gap-4">
@@ -44,7 +44,7 @@ const Listing = ({listing}:{listing:listings}) => {
       </p>
      <div className="flex gap-2 items-center mb-4">
       <FontAwesomeIcon icon={faLocationDot} />
-     <p className='font-bold'>{city}</p>
+     <p className='font-bold'>{country}</p>
      </div>
       <div className="">
       <span className="bg-slate-300 capitalize  text-black font-bold rounded-md p-2 ">{listing.category}</span>
