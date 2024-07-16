@@ -48,9 +48,9 @@ export default function Home() {
       {/* search */}
      <FilterForm action={handleSearch} />
       {/* listings */}
-      <div className="grow w-3/4 p-4 mx-auto bg-slate-200/70">
+      <div className="grow w-3/4 p-4 mx-auto bg-slate-200/70 mb-6">
         <h2 className="font-bold text-2xl mb-6 mt-2 text-center md:text-start ">Latest Listings</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-6 mt-4 justify-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-6 mt-4 justify-center items-center ">
           {listingData &&  (
             listingData?.map((listing, idx) => (
               <Listing key={idx} listing={listing} />
