@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Listing from "@/components/home/Listing";
+import Loading from "./loading";
 
 const MyListingPage = async () => {
   const session = await getServerSession(authOptions);

@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import Loading from "../loading";
 
 type Props = {
   params:{
@@ -69,6 +70,7 @@ const page =  async (args:Props) => {
     </div>
     </div>
   </div>
+  
   )
 };
 

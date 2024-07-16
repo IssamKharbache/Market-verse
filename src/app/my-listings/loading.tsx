@@ -2,8 +2,8 @@ import React from "react";
 
 const loading = () => {
   return (
-    <div className="max-w-[1400px] mx-auto bg-slate-200">
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-4 justify-center items-center">
+    <div className="max-w-[1400px] mx-auto bg-slate-200 p-4 ">
+ <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-center">
     <div role="status" className=" animate-pulse  flex flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-4 justify-center items-center ">
         <svg

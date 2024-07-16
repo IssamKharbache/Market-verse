@@ -4,6 +4,7 @@ import { categories, defaultRadius } from "@/utils/db";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { Location } from "../map/LocationPicker";
 import SubmitButton from "./SubmitButton";
+import { useRouter } from "next/navigation";
 
 type Props = {
   action: (data: FormData) => void;
@@ -11,7 +12,10 @@ type Props = {
 
 const FilterForm = ({ action }: Props) => {
 
+
   const formRef = useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
+
   return (
     <form
       ref={formRef}
@@ -20,7 +24,7 @@ const FilterForm = ({ action }: Props) => {
     >
       {/* form  input */}
       <input name="query" type="text" placeholder="Search listing..." />
-      <div>
+      <div onClick={()=>router.push("/#listings")}>
         <LabelRadioButton
           defaultCkecked={true}
           keyName="category"
@@ -53,11 +57,7 @@ const FilterForm = ({ action }: Props) => {
       >
         Search
       </SubmitButton>
-      <button
-        className="bg-red-500/90 hover:bg-red-500 text-white py-2 rounded transition"
-      >
-        Reset filters
-      </button>
+ 
     </form>
   );
 };
