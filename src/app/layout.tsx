@@ -5,11 +5,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Header from "@/components/navbar/Header";
 import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Nunito_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MarketVERSE",
+  title: "Market verse",
   description: "Market place platform",
 };
 
@@ -23,6 +24,7 @@ export default async function  RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Toaster richColors position="top-center" />
+        <NextTopLoader color="#698474" />
         <Header session={session} />
         {children}
         </body>

@@ -22,7 +22,7 @@ const MyListingPage = async () => {
       {myListings.length > 0 ? (
         <div className="max-w-[1400px] mx-auto bg-slate-200">
            <h1 className="text-5xl text-center items-center  mb-6 p-4">My Listings</h1>
-         <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-center  ">
+         <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center items-center">
             {
                 myListings.map((listing,idx)=>(
                     <Listing listing={listing} key={idx} /> 

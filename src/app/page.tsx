@@ -6,6 +6,7 @@ import LoadingSpinner from "@/components/spinner/LoadingSpinner";
 import { listings } from "@/models/listing";
 import { useEffect,useState } from "react";
 import Loading from "./loading";
+import Loadings from "./loading";
 
 export default function Home() {
   const [listingData, setListingData] = useState<listings[]>();
@@ -48,7 +49,7 @@ export default function Home() {
       {/* search */}
      <FilterForm action={handleSearch} />
       {/* listings */}
-      <div className="grow w-3/4 p-4 mx-auto bg-slate-200/70 mb-6">
+      <div className="grow w-3/4 h-screen p-4 mx-auto bg-slate-200/70 mb-6">
         <h2 className="font-bold text-2xl mb-6 mt-2 text-center md:text-start ">Latest Listings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-4 justify-center items-center ">
           {listingData &&  (
@@ -56,16 +57,6 @@ export default function Home() {
               <Listing key={idx} listing={listing} />
             ))
           )}
-
-          {listingData && listingData?.length === 0 && (
-             
-              <>
-                <div className="flex  mx-auto items-center justify-center mt-8">
-                  <p className="text-3xl md:text-5xl font-bold">No Listings found</p>
-                </div>
-              </>
-            )
-          }
           {
             loading && <>
             <Skeleton />
@@ -73,11 +64,19 @@ export default function Home() {
             <Skeleton />
             <Skeleton />
             <Skeleton />
-            <Skeleton />
-            <Skeleton />
             </>
           }
+          
         </div>
+        {listingData && listingData?.length === 0 && (
+             
+             <>
+               <div className="p-4  w-full mt-36  mb-6">
+                 <p className="text-3xl md:text-5xl font-bold text-center">No Listings found</p>
+               </div>
+             </>
+           )
+         }
       </div>
       
     </div>

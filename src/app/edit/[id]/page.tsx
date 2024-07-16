@@ -34,7 +34,7 @@ const page = async (props:Props) => {
   return (
     <div>
       <h1 className="font-bold  mx-auto mt-4 ml-8 text-4xl">Edit listing</h1>
-      <ListingForm id={listing._id} defaultFiles={listing.files} defaultLocation={listing.location} defaultValues={listing} isEdit={true}  />
+      <ListingForm id={JSON.parse(JSON.stringify(listing._id))} defaultFiles={listing.files} defaultLocation={listing.location} defaultValues={listing} isEdit={true}  />
     </div>
   )
 }
