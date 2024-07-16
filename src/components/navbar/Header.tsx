@@ -29,9 +29,7 @@ const Header = ({ session }: { session: Session | null }) => {
         </Link>
         {!session?.user && (
           <>
-            <button className="hidden md:flex border text-gray-600 border-gray-400 hover:bg-gray-300 hover:text-black items-center gap-2 ">
-              Sign up
-            </button>
+           
             <button
               onClick={() => signIn("google")}
               className=" hidden md:flex border-2 border-primary text-primary hover:bg-primary hover:text-white items-center gap-2 "

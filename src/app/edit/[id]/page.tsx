@@ -1,6 +1,7 @@
 "use server"
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import SignInBtn from "@/components/auth/SignInBtn";
 import ListingForm from "@/components/forms/ListingForm"
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
@@ -17,8 +18,16 @@ type Props = {
 const page = async (props:Props) => {
   const id =  props.params.id;
   await connectDb();
-
   const session = await getServerSession(authOptions);
+  if(!session){
+     return (
+        <div className="flex flex-col gap-8 items-center justify-center">
+         <p className="font-bold text-2xl md:text-5xl mt-24"> Please log in to create a new listing</p>
+          <SignInBtn />
+        </div>
+      )
+  }
+   
   const listing = await listingModel.findById(id);
   if(!listing){
     return <div className="flex items-center  justify-center mt-24">
@@ -30,7 +39,6 @@ const page = async (props:Props) => {
       <p className="text-4xl font-bold ">Not authorized to edit this listing</p>
     </div>
   }
-
   return (
     <div>
       <h1 className="font-bold  mx-auto mt-4 ml-8 text-4xl">Edit listing</h1>
