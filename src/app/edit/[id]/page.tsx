@@ -6,6 +6,7 @@ import ListingForm from "@/components/forms/ListingForm"
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 
 
 type Props = {
@@ -27,7 +28,16 @@ const page = async (props:Props) => {
         </div>
       )
   }
-   
+  if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+    // Yes, it's a valid ObjectId, proceed with `findById` call.
+    return(
+      <div className="flex flex-col gap-8 items-center justify-center">
+      <p className="font-bold text-2xl md:text-5xl mt-24"> Please make sure this listing exist</p>
+      <Link href="/" className="py-2 px-4 font-bold bg-primary hover:bg-primary-hover transition text-white rounded">Go home</Link>
+     </div>
+    )
+    
+}
   const listing = await listingModel.findById(id);
   if(!listing){
     return <div className="flex items-center  justify-center mt-24">
