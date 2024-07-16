@@ -1,32 +1,38 @@
+"use client";
 import { useState } from 'react'
-import AddListingForm from './AddListingForm'
+import AddListingForm, { ListingTextFields } from './AddListingForm'
 import SubmitButton from './SubmitButton'
 import { UploadResponse } from 'imagekit/dist/libs/interfaces'
-import { createAd } from '@/app/actions/listingActions'
+import { createAd, updateListing } from '@/app/actions/listingActions'
 import { toast } from 'sonner'
 import { redirect } from 'next/navigation'
 import LocationPicker, { Location } from '../map/LocationPicker'
 import { faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import UploadArea from '../imagehandler/UploadArea'
-
-const defaultLocation = {
-    lat: 33.573616824951735,
-    lng: -7.617842797047212
-
-  }
+import { revalidatePath } from 'next/cache';
 
 
-const ListingForm = () => {
- 
-      //states
-      const [files, setFiles] = useState<UploadResponse[]>([]);
-      const [location, setLocation] = useState<Location>(defaultLocation);
+
+type Props = {
+  id?:string | null
+  defaultFiles?:UploadResponse[];
+  defaultLocation:Location;
+  defaultValues?:ListingTextFields;
+  isEdit:boolean;
+}
+const ListingForm = ({
+  id=null,
+  defaultFiles = [],
+  defaultLocation,
+  defaultValues = {},
+  isEdit,
+}:Props) => {
+      const [files, setFiles] = useState<UploadResponse[]>(defaultFiles);
+      const [location, setLocation] = useState<Location | null>(defaultLocation);
       const [geoLocation, setGeoLocation] = useState<Location | null>(null);
-    
       //states to handle submit
       const [isImageUploading,setIsImageUploading] = useState<boolean>(false);
-    
       //get current location function
       const handleLocateMyPosition = () => {
         navigator.geolocation.getCurrentPosition((ev) => {
@@ -35,23 +41,31 @@ const ListingForm = () => {
           setGeoLocation(location);
         }, console.error);
       }
-      //handle submit function
+         //handle submit function
     
-      const handleSubmit = async (formData: FormData) => {
-        formData.set("location", JSON.stringify(location));
-        formData.set("files", JSON.stringify(files));
-        const res = await createAd(formData);
+    const handleSubmit = async (formData: FormData) => {
+      formData.set("location", JSON.stringify(location));
+      formData.set("files", JSON.stringify(files));
+      if(id){
+        formData.set("_id",id);
+      }
+       const  res =  id ? await updateListing(formData) : await createAd(formData);
+      if(id){
+         toast.success("Listing updated successfully");
+         redirect("/listing/"+res._id);
+        }else{
         toast.success("Listing created successfully");
         redirect("/listing/"+res._id)
-        
       }
+    }
+    
   return (
-    <form action={handleSubmit} className="max-w-[1000px] mx-auto flex gap-8 mt-8">
+    <form action={handleSubmit} className="max-w-[1000px] p-8 mx-auto flex flex-col lg:flex-row lg:p-0  gap-8 mt-8 mb-8">
       {/* input fiels */}
       <div className="grow">
-        <AddListingForm />
-         <SubmitButton isImageUploading={isImageUploading}>
-          Publish listing
+        <AddListingForm defaultValues={defaultValues}/>
+        <SubmitButton cn='hidden lg:block'  isImageUploading={isImageUploading}>
+          {!isEdit ? "Publish listing" : "Update listing"}
          </SubmitButton>
       </div>
       {/* image uploader and location */}
@@ -66,10 +80,15 @@ const ListingForm = () => {
           </div>
           <div className="bg-slate-200 rounded p-4 min-h-12 text-gray-100">
             {/* map here */}
-            <LocationPicker geoCords={geoLocation} defaultLocation={location} onChange={(location) => setLocation(location)} />
+            <LocationPicker geoCords={geoLocation} defaultLocation={defaultLocation} onChange={(location) => setLocation(location)} />
           </div>
         </div>
+        <SubmitButton cn='block lg:hidden'  isImageUploading={isImageUploading}>
+        {!isEdit ? "Publish listing" : "Update listing"}
+         </SubmitButton>
       </div>
+      
+     
     </form>
   )
 }

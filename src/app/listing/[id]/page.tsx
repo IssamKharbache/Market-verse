@@ -63,10 +63,6 @@ const page =  async (args:Props) => {
       <p className="text-sm font-semibold">{listings.description}</p>
       <label>Contact information</label>
       <p className="font-semibold">{listings.contact}</p>
-      <div className="flex gap-2 items-center mb-4 mt-6">
-      <FontAwesomeIcon icon={faLocationDot} />
-     <p className='font-bold'>{country}</p>
-     </div>
      <div className="flex flex-col">
     <label htmlFor="">Location</label>
     <LocationMap location={listings.location} className="w-full h-56" />
