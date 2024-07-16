@@ -1,5 +1,10 @@
 "use client";
-import { faFolder,faPlus, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFolder,
+  faPlus,
+  faSignOut,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
@@ -40,7 +45,7 @@ const Header = ({ session }: { session: Session | null }) => {
           <>
             <div className="">
               <button
-                onClick={() => setShowDropdown(prev=>!prev)}
+                onClick={() => setShowDropdown((prev) => !prev)}
                 className="block"
               >
                 <Image
@@ -48,37 +53,45 @@ const Header = ({ session }: { session: Session | null }) => {
                   alt="avatar"
                   width={34}
                   height={34}
-                  className={
-                    `${showDropdown && "z-50"} rounded-full  relative`
-                  }
+                  className={`${showDropdown && "z-50"} rounded-full  relative`}
                 />
               </button>
               {showDropdown && (
                 <>
-                  <div onClick={()=>setShowDropdown(false)} className="bg-black/90 fixed inset-0 z-40"></div>
-                  <div className={`absolute z-50 top-20 flex flex-col items-center  w-56 bg-slate-100 mr-16 rounded  overflow-hidden duration-500 ${showDropdown ? "right-0" :"right-96"}`}>
-                  <Link
+                  <div
+                    onClick={() => setShowDropdown(false)}
+                    className="bg-black/90 fixed inset-0 z-40"
+                  ></div>
+                  <div
+                    className={`absolute z-50 top-20 flex flex-col items-center  w-56 bg-slate-100 mr-16 rounded  overflow-hidden duration-500 ${
+                      showDropdown ? "right-0" : "right-96"
+                    }`}
+                  >
+                    <Link
+                      onClick={() => setShowDropdown(false)}
                       className=" p-4 flex gap-4 items-center justify-center w-full text-center border-b border-gray-400 hover:bg-slate-200 duration-200"
-                      href="/mylistings"
+                      href="/my-listings"
                     >
-                       <FontAwesomeIcon icon={faUser}/>
-                     <span>Profile</span>
+                      <FontAwesomeIcon icon={faUser} />
+                      <span>Profile</span>
                     </Link>
                     <Link
+                      onClick={() => setShowDropdown(false)}
                       className=" p-4 flex gap-4 items-center justify-center w-full text-center border-b border-gray-400 hover:bg-slate-200 duration-200"
-                      href="/mylistings"
+                      href="/my-listings"
                     >
-                       <FontAwesomeIcon icon={faFolder}/>
-                     <span>Listings</span>
+                      <FontAwesomeIcon icon={faFolder} />
+                      <span>Listings</span>
                     </Link>
                     <button
                       className="flex gap-4 items-center justify-center p-4 w-full hover:bg-slate-200 duration-200"
-                      onClick={() => signOut()}
+                      onClick={() => {
+                        signOut();
+                        setShowDropdown(false);
+                      }}
                     >
-                     <FontAwesomeIcon icon={faSignOut}  />
-                      <span>
-                      Log out
-                      </span>
+                      <FontAwesomeIcon icon={faSignOut} />
+                      <span>Log out</span>
                     </button>
                   </div>
                 </>
