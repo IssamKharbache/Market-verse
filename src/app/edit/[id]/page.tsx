@@ -6,11 +6,6 @@ import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { getServerSession } from "next-auth";
 
-const defaultLocation = {
-  lat: 33.573616824951735,
-  lng: -7.617842797047212
-
-}
 
 type Props = {
   params:{
@@ -39,7 +34,7 @@ const page = async (props:Props) => {
   return (
     <div>
       <h1 className="font-bold  mx-auto mt-4 ml-8 text-4xl">Edit listing</h1>
-      <ListingForm id={listing._id} defaultFiles={listing.files} defaultLocation={defaultLocation} defaultValues={listing} isEdit={true}  />
+      <ListingForm id={listing._id} defaultFiles={listing.files} defaultLocation={listing.location} defaultValues={listing} isEdit={true}  />
     </div>
   )
 }

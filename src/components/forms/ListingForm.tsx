@@ -5,12 +5,12 @@ import SubmitButton from './SubmitButton'
 import { UploadResponse } from 'imagekit/dist/libs/interfaces'
 import { createAd, updateListing } from '@/app/actions/listingActions'
 import { toast } from 'sonner'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import LocationPicker, { Location } from '../map/LocationPicker'
 import { faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import UploadArea from '../imagehandler/UploadArea'
-import { revalidatePath } from 'next/cache';
+import UploadArea from '../imagehandler/UploadArea';
+
 
 
 
@@ -33,6 +33,8 @@ const ListingForm = ({
       const [geoLocation, setGeoLocation] = useState<Location | null>(null);
       //states to handle submit
       const [isImageUploading,setIsImageUploading] = useState<boolean>(false);
+
+      const router = useRouter();
       //get current location function
       const handleLocateMyPosition = () => {
         navigator.geolocation.getCurrentPosition((ev) => {
@@ -52,10 +54,10 @@ const ListingForm = ({
        const  res =  id ? await updateListing(formData) : await createAd(formData);
       if(id){
          toast.success("Listing updated successfully");
-         redirect("/listing/"+res._id);
+         router.push("/listing/"+res._id);
         }else{
         toast.success("Listing created successfully");
-        redirect("/listing/"+res._id)
+        router.push("/listing/"+res._id)
       }
     }
     

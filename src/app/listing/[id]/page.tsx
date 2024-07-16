@@ -1,15 +1,17 @@
 "use server";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import DeleteButton from "@/components/forms/DeleteButton";
 import Gallery from "@/components/imagehandler/Gallery";
 import LocationMap from "@/components/map/LocationMap";
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { formatMoney } from "@/utils/NumberFormat";
-import { faLocationDot, faPen, faTrashCan, } from "@fortawesome/free-solid-svg-icons";
+import {  faPen, faTrashCan, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 type Props = {
   params:{
@@ -22,11 +24,15 @@ const page =  async (args:Props) => {
   
   await connectDb();
   const id =  args.params.id
-  const country = args.searchParams.location ;
   const listings = await listingModel.findById(id);
   const session = await getServerSession(authOptions);
   if(!listings){
-    return "Not found !"
+    return (
+      <div className="flex items-center justify-center mt-24  flex-col gap-4">
+        <p className="text-center font-bold text-4xl">Listing was not found ! probably this listing was deleted by the owner</p>
+        <Link href="/" className="bg-primary hover:bg-primary-hover transition py-3 px-6 text-white font-bold rounded">Go home</Link>
+      </div>
+    )
   }
   return(
     <div className="flex flex-col md:flex-row  absolute inset-0 top-24 " >
@@ -43,17 +49,11 @@ const page =  async (args:Props) => {
             <span>Edit</span>
             <FontAwesomeIcon icon={faPen}  className="w-3 h-3"/>
           </Link>
-          <button  className="bg-red-500/80 hover:bg-red-500  text-white ">
-        
-          <span>Delete</span>
-          <FontAwesomeIcon icon={faTrashCan}  className="w-3 h-3"/>
-          </button>
+          <DeleteButton id={id} />
         </div>
       )}
     </div>
-      
-     
-      <label >Price</label>
+      <label>Price</label>
       <p className="text-xl font-bold">{formatMoney(listings.price)}</p>
       <div className="flex items-center gap-4 mt-4">
         <label className="text-lg font-semibold">Category</label>

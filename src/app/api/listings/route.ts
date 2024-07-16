@@ -1,7 +1,9 @@
 import { listingModel, listings } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { FilterQuery, PipelineStage } from "mongoose";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export const GET = async (req: Request, res: Response) => {
   try {
@@ -39,3 +41,29 @@ export const GET = async (req: Request, res: Response) => {
     return Response.json("Error 505 while getting listing");
   }
 };
+
+
+export const DELETE = async (req: Request, res: Response) =>{
+  try {
+    
+    const url = new URL(req.url)
+    const id =  url.searchParams.get("id");
+    await connectDb();
+    const listing = await listingModel.findById(id);
+    const session = await getServerSession(authOptions);
+
+    if(!listing || listing.userEmail !== session?.user?.email){
+      return Response.json(false);
+    }
+    await listingModel.findByIdAndDelete(id);
+    return Response.json({
+      success:true,
+      message:"Listing deleted successfully"
+    });
+  } catch (error) {
+    return Response.json({
+      success:false,
+      message:"Internal server error"
+    })
+  }
+}
