@@ -2,11 +2,9 @@
 
 import ListingForm from "@/components/forms/ListingForm";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import { signIn } from "next-auth/react";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import SignInBtn from "@/components/auth/SignInBtn";
+import { authOptions } from "../api/auth/[...nextauth]/option";
 
 
 

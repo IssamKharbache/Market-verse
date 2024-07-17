@@ -1,19 +1,16 @@
 "use server";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/option";
 import DeleteButton from "@/components/forms/DeleteButton";
 import Gallery from "@/components/imagehandler/Gallery";
 import LocationMap from "@/components/map/LocationMap";
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { formatMoney } from "@/utils/NumberFormat";
-import {  faPen, faTrashCan, } from "@fortawesome/free-solid-svg-icons";
+import {  faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import Loading from "../loading";
-
 type Props = {
   params:{
     id:string

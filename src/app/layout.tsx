@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import {Roboto } from "next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import Header from "@/components/navbar/Header";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
+import { authOptions } from "./api/auth/[...nextauth]/option";
 
 const inter = Roboto({ subsets: ["latin"] ,weight:["100","300","400","500","700","900"] });
 
