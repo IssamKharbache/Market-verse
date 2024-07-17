@@ -45,11 +45,11 @@ export default function Home() {
   };
   //
   return (
-    <div className="flex flex-col  md:flex-row  w-full">
+    <div className="flex flex-col  md:flex-row  w-full mb-16">
       {/* search */}
      <FilterForm action={handleSearch} />
       {/* listings */}
-      <div className="grow w-3/4 h-screen p-4 mx-auto bg-slate-200/70 mb-6" id="listings">
+      <div className="grow w-3/4 h-screen p-4 mx-auto" id="listings">
         <h2 className="font-bold text-2xl mb-6 mt-2 text-center md:text-start ">Latest Listings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mt-4 justify-center items-center ">
           {listingData &&  (

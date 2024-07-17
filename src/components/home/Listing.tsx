@@ -36,16 +36,13 @@ const Listing = ({listing}:{listing:listings}) => {
       </div>
     )}
     <div className="flex flex-col gap-4">
-      <Link href={`/listing/${listing._id}`} className=" font-bold mt-4 text-xl">
+      <Link href={`/listing/${listing._id}`} className=" font-bold mt-4 text-xl line-clamp-1">
         {listing.title}
       </Link>
       <p className="font-bold  mt-4 text-2xl">
         ${listing.price}
       </p>
-     <div className="flex gap-2 items-center mb-4">
-      <FontAwesomeIcon icon={faLocationDot} />
-     <p className='font-bold'>{country}</p>
-     </div>
+  
       <div className="">
       <span className="bg-slate-300 capitalize  text-black font-bold rounded-md p-2 ">{listing.category}</span>
       </div>
