@@ -36,7 +36,7 @@ const MyListingPage = async () => {
           <p className="font-bold text-4xl text-center">You don't have any listings yet </p>
           <Link
           href="/new"
-          className="hidden md:flex bg-primary hover:bg-primary-hover text-white  items-center gap-2 py-2 px-4 mt-4 rounded transition"
+          className="flex bg-primary hover:bg-primary-hover text-white  items-center gap-2 py-2 px-4 mt-4 rounded transition"
         >
           <FontAwesomeIcon icon={faPlus} className="h-4 w-4" />
           <span>Create a listing</span>
