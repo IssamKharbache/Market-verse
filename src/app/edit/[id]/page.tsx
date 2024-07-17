@@ -1,6 +1,5 @@
 "use server"
-
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/option";
 import SignInBtn from "@/components/auth/SignInBtn";
 import ListingForm from "@/components/forms/ListingForm"
 import { listingModel } from "@/models/listing";

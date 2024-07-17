@@ -1,7 +1,6 @@
 "use server";
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { connectDb } from "@/utils/db";
 import { listingModel } from "@/models/listing";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +8,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Listing from "@/components/home/Listing";
 import Loading from "./loading";
+import { authOptions } from "../api/auth/[...nextauth]/option";
 
 const MyListingPage = async () => {
   const session = await getServerSession(authOptions);

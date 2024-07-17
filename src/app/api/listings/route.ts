@@ -2,8 +2,8 @@ import { listingModel, listings } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { FilterQuery, PipelineStage } from "mongoose";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../auth/[...nextauth]/option";
+
 
 export const GET = async (req: Request, res: Response) => {
   try {

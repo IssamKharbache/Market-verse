@@ -3,8 +3,8 @@
 import { listingModel } from "@/models/listing";
 import { connectDb } from "@/utils/db";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
+import { authOptions } from "../api/auth/[...nextauth]/option";
 
 export const createAd = async (formData:FormData) => {
     const {files,location,...data} = Object.fromEntries(formData)
