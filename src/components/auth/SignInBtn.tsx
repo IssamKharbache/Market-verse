@@ -8,10 +8,10 @@ const SignInBtn = () => {
   return (
     <button
     onClick={() => signIn("google")}
-    className=" hidden md:flex border-2 border-primary text-primary hover:bg-primary hover:text-white items-center gap-2 py-2 px-5 rounded "
+    className="flex border-2 border-primary text-primary hover:bg-primary hover:text-white items-center gap-2 py-2 px-5 rounded "
   >
     <FontAwesomeIcon icon={faUser} className="h-3" />
-    <span>Login</span>
+    <span className='text-sm md:text-base'>Login</span>
   </button>
   )
 }
