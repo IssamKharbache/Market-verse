@@ -44,7 +44,7 @@ const page =  async (args:Props) => {
     {session && session?.user?.email === listings.userEmail && (
         <div className="flex gap-4 *:flex *:gap-2 *:items-center *:py-2 *:px-6 *:rounded *:font-bold *:transition *:cursor-pointer">
           <Link href={`/edit/${listings._id}`}  className="items-center border-2 border-gray-400 hover:bg-gray-400 ">
-            <span>Edit</span>
+            <span className="hidden md:block">Edit</span>
             <FontAwesomeIcon icon={faPen}  className="w-3 h-3"/>
           </Link>
           <DeleteButton id={id} />

@@ -61,7 +61,7 @@ const DeletelistingButton = ({id}:{id:string}) => {
       onClick={() => setShowDeleteQuestion(true)}
       className="bg-red-500/80 hover:bg-red-500  text-white "
     >
-      <span>Delete</span>
+      <span className="hidden md:block">Delete</span>
       <FontAwesomeIcon icon={faTrashCan} className="w-3 h-3" />
     </button>
   );

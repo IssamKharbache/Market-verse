@@ -16,7 +16,7 @@ import SignInBtn from "../auth/SignInBtn";
 const Header = ({ session }: { session: Session | null }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   return (
-    <header className="flex justify-between h-24 items-center px-8 border-b">
+    <header className="flex justify-between h-24 items-center px-4 md:px-8 border-b">
       <Link href="/" className="text-xl md:text-3xl font-bold text-primary">
         Market verse
       </Link>
@@ -30,8 +30,13 @@ const Header = ({ session }: { session: Session | null }) => {
         </Link>
         {!session?.user && (
           <>
-           
-           <SignInBtn />
+            <button
+              onClick={() => signIn("google")}
+              className="flex border-2 border-primary text-primary hover:bg-primary hover:text-white items-center gap-2 py-2 px-5 rounded "
+            >
+              <FontAwesomeIcon icon={faUser} className="h-3" />
+              <span className="hidden md:block">Login</span>
+            </button>
           </>
         )}
         {session?.user && (
